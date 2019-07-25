@@ -186,3 +186,5 @@ The logo illustration was <a href="http://www.freepik.com">Designed by Freepik</
 ## Legal
 
 This software is distributed under the [MIT](LICENSE.md) license.
+
+Forked from [keithmifsud/jekyll-target-blank](https://github.com/keithmifsud/jekyll-target-blank).
