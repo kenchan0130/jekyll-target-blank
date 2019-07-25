@@ -1,6 +1,6 @@
 # Jekyll Target Blank
 
-[![Build Status](https://travis-ci.org/kenchan0130/jekyll-target-blank.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-target-blank.svg?branch=master)
+[![Build Status](https://travis-ci.org/kenchan0130/jekyll-target-blank.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-target-blank)
 [![Gem Version](https://badge.fury.io/rb/jekyll-target-blank.svg)](https://badge.fury.io/rb/jekyll-target-blank)
 
 The version is [original](https://github.com/keithmifsud/jekyll-target-blank). This project is forked.
