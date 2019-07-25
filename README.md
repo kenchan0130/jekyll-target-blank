@@ -13,8 +13,8 @@ Automatically adds a `target="_blank" rel="noopener noreferrer"` attribute to al
 
 Add the following to your site's `Gemfile`
 
-```
-gem 'jekyll-target-blank', github: 'kenchan0130/jekyll-target-blank'
+```ruby
+gem 'jekyll-target-blank', git: 'https://github.com/kenchan0130/jekyll-target-blank', branch: 'master'
 ```
 
 and add the following to your site's `_config.yml`
