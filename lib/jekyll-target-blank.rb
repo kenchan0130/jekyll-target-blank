@@ -89,12 +89,11 @@ module Jekyll
       #
       # link = Nokogiri node.
       def processable_link?(link)
-        if not_mailto_link?(link["href"]) && external?(link["href"])
-          if @requires_specified_css_class
-            return false unless includes_specified_css_class?(link)
-          end
-          true
-        end
+        return false if mailto_link?(link["href"]) || !external?(link["href"])
+
+        return false if @requires_specified_css_class && !includes_specified_css_class?(link)
+
+        true
       end
 
       # Private: Handles adding the target attribute of the config
@@ -167,8 +166,8 @@ module Jekyll
       # Private: Checks if the link is a mailto url.
       #
       # link - a url.
-      def not_mailto_link?(link)
-        true unless link.to_s.start_with?("mailto:")
+      def mailto_link?(link)
+        link.to_s.start_with?("mailto:")
       end
 
       # Private: Checks if the links points to a host
@@ -198,15 +197,10 @@ module Jekyll
       # link - the url under test.
       def includes_specified_css_class?(link)
         link_classes = get_existing_css_classes(link)
-        if link_classes
-          link_classes = link_classes.split(" ")
-          contained    = false
-          link_classes.each do |name|
-            contained = true unless name != @required_css_class_name
-          end
-          return contained
-        end
-        false
+        return false unless link_classes
+
+        link_classes = link_classes.split(" ")
+        link_classes.any? { |name| name == @required_css_class_name }
       end
 
       # Private: Gets the the css classes of the link.
@@ -277,12 +271,8 @@ module Jekyll
         when nil, NilClass
           false
         else
-          noopener = config.fetch("noopener", true)
-          if noopener == false
-            return true
-          else
-            return false
-          end
+          noopener_config = !!config.fetch("noopener", true)
+          !noopener_config
         end
       end
 
@@ -296,12 +286,8 @@ module Jekyll
         when nil, NilClass
           false
         else
-          noreferrer = config.fetch("noreferrer", true)
-          if noreferrer == false
-            return true
-          else
-            return false
-          end
+          noreferrer_config = !!config.fetch("noreferrer", true)
+          !noreferrer_config
         end
       end
 
