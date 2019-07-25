@@ -1,18 +1,20 @@
 # Jekyll Target Blank
 
+[![Build Status](https://travis-ci.org/kenchan0130/jekyll-target-blank.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-target-blank.svg?branch=master)
+[![Gem Version](https://badge.fury.io/rb/jekyll-target-blank.svg)](https://badge.fury.io/rb/jekyll-target-blank)
+
+The version is [original](https://github.com/keithmifsud/jekyll-target-blank). This project is forked.
+
 ![Jekyll Target Blank Logo](assets/logo.png "Jekyll Target Blank")
 
 Automatically adds a `target="_blank" rel="noopener noreferrer"` attribute to all __external__ links in Jekyll's content plus several other automation features for the external links. [Read more here](https://keith-mifsud.me/projects/jekyll-target-blank)
-
-[![Gem Version](https://badge.fury.io/rb/jekyll-target-blank.svg)](https://badge.fury.io/rb/jekyll-target-blank)
-[![Build Status](https://travis-ci.org/keithmifsud/jekyll-target-blank.svg?branch=master)](https://travis-ci.org/keithmifsud/jekyll-target-blank)
 
 ## Installation
 
 Add the following to your site's `Gemfile`
 
 ```
-gem 'jekyll-target-blank'
+gem 'jekyll-target-blank', github: 'kenchan0130/jekyll-target-blank'
 ```
 
 and add the following to your site's `_config.yml`
@@ -181,9 +183,6 @@ rspec
 
 The logo illustration was <a href="http://www.freepik.com">Designed by Freepik</a>. Thank you ❤️
 
-
 ## Legal
 
 This software is distributed under the [MIT](LICENSE.md) license.
-
-&copy; 2018 - Keith Mifsud <https://keith-mifsud.me> and approved contributors.
