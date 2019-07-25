@@ -7,7 +7,7 @@ require "uri"
 module Jekyll
   class TargetBlank
     BODY_START_TAG         = "<body"
-    OPENING_BODY_TAG_REGEX = %r!<body([^<>]*)>\s*!
+    OPENING_BODY_TAG_REGEX = %r!<body([^<>]*)>\s*!.freeze
 
     class << self
       # Public: Processes the content and updated the external links
@@ -117,13 +117,9 @@ module Jekyll
 
       # Private: Handles the default rel attribute values
       def add_default_rel_attributes?
-        if should_not_include_noopener?
-          @should_add_noopener = false
-        end
+        @should_add_noopener = false if should_not_include_noopener?
 
-        if should_not_include_noreferrer?
-          @should_add_noreferrrer = false
-        end
+        @should_add_noreferrrer = false if should_not_include_noreferrer?
       end
 
       # Private: Sets any extra rel attribute values
@@ -157,28 +153,15 @@ module Jekyll
       #
       # link = Nokogiri node.
       def add_rel_attributes(link)
-        rel = ""
-        if @should_add_noopener
-          rel = "noopener"
-        end
+        rel_list = []
 
-        if @should_add_noreferrrer
-          unless rel.empty?
-            rel += " "
-          end
-          rel += "noreferrer"
-        end
+        rel_list << "noopener" if @should_add_noopener
 
-        if @should_add_extra_rel_attribute_values
-          unless rel.empty?
-            rel += " "
-          end
-          rel += @extra_rel_attribute_values
-        end
+        rel_list << "noreferrer" if @should_add_noreferrrer
 
-        unless rel.empty?
-          link["rel"] = rel
-        end
+        rel_list << @extra_rel_attribute_values if @should_add_extra_rel_attribute_values
+
+        link["rel"] = rel_list.join(" ") unless rel_list.empty?
       end
 
       # Private: Checks if the link is a mailto url.
@@ -332,6 +315,6 @@ module Jekyll
 end
 
 # Hooks into Jekyll's post_render event.
-Jekyll::Hooks.register %i[pages documents], :post_render do |doc|
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   Jekyll::TargetBlank.process(doc) if Jekyll::TargetBlank.document_processable?(doc)
 end

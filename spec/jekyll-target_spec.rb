@@ -12,13 +12,11 @@ RSpec.describe(Jekyll::TargetBlank) do
   end
   let(:configs) do
     Jekyll.configuration(config_overrides.merge(
-      {
-        "skip_config_files" => false,
-        "collections"       => { "docs" => { "output" => true } },
-        "source"            => unit_fixtures_dir,
-        "destination"       => unit_fixtures_dir("_site"),
-      }
-    ))
+                           "skip_config_files" => false,
+                           "collections"       => { "docs" => { "output" => true } },
+                           "source"            => unit_fixtures_dir,
+                           "destination"       => unit_fixtures_dir("_site")
+                         ))
   end
   let(:target_blank) { described_class }
   let(:site) { Jekyll::Site.new(configs) }
@@ -425,22 +423,22 @@ RSpec.describe(Jekyll::TargetBlank) do
   private
 
   def post_with_layout_result
-    <<-RESULT
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>Post with external markdown link</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="/css/screen.css">
-</head>
-<body class="wrap">
-    <div>Layout content started.</div>
-<p>Link to <a href="https://google.com" target="_blank" rel="noopener noreferrer">Google</a>.</p>
+    <<~RESULT
+      <!DOCTYPE HTML>
+      <html lang="en-US">
+      <head>
+          <meta charset="UTF-8">
+          <title>Post with external markdown link</title>
+          <meta name="viewport" content="width=device-width,initial-scale=1">
+          <link rel="stylesheet" href="/css/screen.css">
+      </head>
+      <body class="wrap">
+          <div>Layout content started.</div>
+      <p>Link to <a href="https://google.com" target="_blank" rel="noopener noreferrer">Google</a>.</p>
 
-    <div>Layout content ended.</div>
-</body>
-</html>
+          <div>Layout content ended.</div>
+      </body>
+      </html>
     RESULT
   end
 end
