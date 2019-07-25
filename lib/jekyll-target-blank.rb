@@ -153,20 +153,15 @@ module Jekyll
       #
       # link = Nokogiri node.
       def add_rel_attributes(link)
-        rel = ""
-        rel = "noopener" if @should_add_noopener
+        rel_list = []
 
-        if @should_add_noreferrrer
-          rel += " " unless rel.empty?
-          rel += "noreferrer"
-        end
+        rel_list << "noopener" if @should_add_noopener
 
-        if @should_add_extra_rel_attribute_values
-          rel += " " unless rel.empty?
-          rel += @extra_rel_attribute_values
-        end
+        rel_list << "noreferrer" if @should_add_noreferrrer
 
-        link["rel"] = rel unless rel.empty?
+        rel_list << @extra_rel_attribute_values if @should_add_extra_rel_attribute_values
+
+        link["rel"] = rel_list.join(" ") unless rel_list.empty?
       end
 
       # Private: Checks if the link is a mailto url.
